@@ -7,11 +7,13 @@ function getMosFrequent(array) {
   for (var i = 0, len = array.length; i < len; i++) {
     var word = array[i];
 
-    if (counts[word] === undefined) {
-      counts[word] = 1;
-    } else {
-      counts[word] = counts[word] + 1;
-    }
+    // if (counts[word] === undefined) {
+    //   counts[word] = 1;
+    // } else {
+    //   counts[word] = counts[word] + 1;
+    // }
+    counts[word] = counts[word] + 1 || 1
+
     if (counts[word] > compare) {
       compare = counts[word];
       mostFrequent = cats[i];

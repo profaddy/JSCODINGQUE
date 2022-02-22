@@ -36,3 +36,6 @@ let isParenthesisMatching = str => {
   }
   return stack.length === 0;
 };
+
+const a = new Set().add("tom").add("jerry").add(1);
+console.log(a,"a");

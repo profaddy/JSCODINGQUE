@@ -28,3 +28,9 @@ const isPalindrome = () => {
       .join("") === chars
   );
 };
+
+/////////isNUmber Pallindrome/////////////////////////////////
+const isPallindrome = (number) => {
+  const reverse = Number(number.toString().split("").reverse().join(""));
+  return reverse === number
+}

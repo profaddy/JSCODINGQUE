@@ -1,0 +1,262 @@
+//Interview Coding Que
+
+****** Variable Scope ************
+var b = 1;
+function outer(){
+    console.log(b) // 
+    var b = 2
+    function inner(){
+        b++;
+        console.log(b) // 
+        if(true) {
+            var b = 3;
+            console.log(b) // 
+        }
+    }
+    inner();
+}
+outer()
+
+
+function outer(){
+    console.log(b)
+    var b = 2
+}
+outer()
+
+1. undefined
+2. NAN
+3. 3
+
+
+******* Variable Scoping ***********
+
+(function () {
+    try {
+        throw new Error();
+    } catch (x) {
+        var x = 1, y = 2;
+        console.log(x);
+    }
+    console.log(x);
+    console.log(y);
+})();
+
+1. 1
+2. undefined
+3. 2
+
+
+****** Variable Scope ************
+
+(function(x) {
+    return (function(y) {
+        console.log(x);
+    })(2)
+})(1);
+
+Ans: 1
+
+
+
+****** Scope and hoisting ************
+
+function foo(){
+    function bar() {
+        return 3;
+    }
+    return bar();
+    function bar() {
+        return 8;
+    }
+}
+foo();
+
+Ans 8
+
+**** This Scope vs Arrow funciton scope ********
+
+const user = {
+    name: "Rohan",
+    age: 30,
+    printAge () {
+        return this.age
+    },
+}
+
+  const printFriendsData = user.printAge;
+  printFriendsData() // 
+
+  user.printAge() // 
+
+ // normal function undefined, 28
+
+
+******** Rapid fires  *********
+
+1. Typeof [] -> Object
+2. 2+true -> 3
+3. "6"+9 -> "69"
+4. 4+3+2+"1" -> "91"
+5. var a = (2, 3, 5); -> 5
+6. null == undefined -> true
+7. typeof null -> Object
+8. typeof undefined -> undefined
+
+
+console.log(1 < 2 < 3); -> true
+console.log(3 > 2 > 1); -> false 
+
+**** Object cloning, deep copy vs shallow copy ******
+
+let obj = {
+    a: 1,
+    b: 2,
+    user: {
+        age: 30
+    }
+};
+
+let copyOBj = obj;
+
+obj.a = 2;
+copyOBj.a = ?
+
+let shallowCopyObj = shallowCopy(obj) // how to shallow copyt
+
+obj.a = 2;
+shallowCopyObj.a = ?
+
+obj.user.age = 35
+shallowCopyObj.user.age = ?
+
+let deepCopyObj = deepCopy(obj) // how to deep copy
+
+obj.a = 2;
+deepCopyObj.a = ?
+
+obj.user.age = 35
+deepCopyObj.user.age = ?
+
+
+
+let objclone = { ... obj}
+
+obj.user.age = 45;
+obj.a = 5
+console.log('After Change - obj: ', obj);           // 45 - This also changes
+console.log('After Change - objclone: ', objclone);
+
+***** Classes ******
+
+**ECMAScript 6 
+
+class Shape {
+    constructor (id, x, y) {
+        this.id = id
+        this.move(x, y)
+    }
+    move (x, y) {
+        this.x = x
+        this.y = y
+    }
+}
+**ECMAScript 5
+
+var Shape = function (id, x, y) {
+    this.id = id;
+    this.move(x, y);
+};
+Shape.prototype.move = function (x, y) {
+    this.x = x;
+    this.y = y;
+};
+
+***** Classes *********
+
+**ECMAScript 6
+
+class Rectangle extends Shape {
+    constructor (id, x, y, width, height) {
+        super(id, x, y)
+        this.width  = width
+        this.height = height
+    }
+}
+class Circle extends Shape {
+    constructor (id, x, y, radius) {
+        super(id, x, y)
+        this.radius = radius
+    }
+}
+
+** ECMAScript 5 
+
+var Rectangle = function (id, x, y, width, height) {
+    Shape.call(this, id, x, y);
+    this.width  = width;
+    this.height = height;
+};
+Rectangle.prototype = Object.create(Shape.prototype);
+Rectangle.prototype.constructor = Rectangle;
+var Circle = function (id, x, y, radius) {
+    Shape.call(this, id, x, y);
+    this.radius = radius;
+};
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle;
+
+****** Static variable check *******
+ 
+class Car {
+    static _def = {
+        brand : 'citroen'
+    }
+   
+    constructor(conf = {}) {
+        this.config = Object.assign(Car._def, conf)
+    }
+  
+    print() {
+      console.log(this.config.brand)
+    }
+ }
+  
+ let car1 = new Car({ brand: 'chevrolet' })
+ let car2 = new Car({ brand: 'ford' })
+ let car3 = new Car()
+ car1.print()     // chevrolet
+ car2.print()     // ford
+ car3.print()     // ford
+
+*******
+ 
+ 
+<footer>
+   <div cclass="div1">
+  
+  
+footer {
+   pos:rel
+}   
+.div1 {
+   display: inline;
+   position: absolute;
+   top: 0;
+   right:0;
+}
+
+
+Promise.resolve().then(() => console.log(4))
+
+//*******************sue strict**************************//
+function f1(){
+    "use strict"
+    return this;
+}
+
+function f2(){
+    return this
+}
+
+console.log(f1.call("1") === f2.call("1"))
